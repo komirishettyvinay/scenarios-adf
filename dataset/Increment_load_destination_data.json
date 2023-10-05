@@ -2,7 +2,7 @@
 	"name": "Increment_load_destination_data",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureDataLakeStorageDestination",
+			"referenceName": "AzureDataLakeStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -10,8 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "Data",
-				"fileSystem": "balayya"
+				"fileSystem": "filesystemtest"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
