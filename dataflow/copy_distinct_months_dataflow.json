@@ -1,0 +1,95 @@
+{
+	"name": "copy_distinct_months_dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Superstore_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Distinct_Destination",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {Row ID} as short,",
+				"          {Order ID} as string,",
+				"          {Order Date} as date 'dd-MM-yyyy',",
+				"          {Ship Date} as date,",
+				"          {Ship Mode} as string,",
+				"          {Customer ID} as string,",
+				"          {Customer Name} as string,",
+				"          Segment as string,",
+				"          {Country/Region} as string,",
+				"          City as string,",
+				"          {State/Province} as string,",
+				"          {Postal Code} as string,",
+				"          Region as string,",
+				"          {Product ID} as string,",
+				"          Category as string,",
+				"          {Sub-Category} as string,",
+				"          {Product Name} as string,",
+				"          Sales as string,",
+				"          Quantity as string,",
+				"          Discount as double,",
+				"          Profit as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 derive({Order Date} = month({Order Date})) ~> derivedColumn1",
+				"derivedColumn1 filter({Order Date} == 1) ~> filter1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          {1} as string,",
+				"          {US-2019-103800} as string,",
+				"          {03-01-2019} as string,",
+				"          {07-01-2019} as string,",
+				"          {Standard Class} as string,",
+				"          {DP-13000} as string,",
+				"          {Darren Powers} as string,",
+				"          Consumer as string,",
+				"          {United States} as string,",
+				"          Houston as string,",
+				"          Texas as string,",
+				"          {77095} as string,",
+				"          Central as string,",
+				"          {OFF-PA-10000174} as string,",
+				"          {Office Supplies} as string,",
+				"          Paper as string,",
+				"          {\"Message Book, Wirebound, Four 5 1/2\"\" X 4\"\" Forms/Pg.} as string,",
+				"          {200 Dupl. Sets/Book\"} as string,",
+				"          {16.448} as string,",
+				"          {2} as string,",
+				"          {0.2} as string,",
+				"          US as string",
+				"     ),",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

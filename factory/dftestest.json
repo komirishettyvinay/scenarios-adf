@@ -1,0 +1,9 @@
+{
+	"name": "dftestest",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "5440241a-cc98-415a-ab14-58f6dd1aa606",
+		"tenantId": "71b3cf85-266f-452c-bbec-11f0d31531a8"
+	}
+}
