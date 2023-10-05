@@ -1,0 +1,139 @@
+{
+	"name": "Duplicates_dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Superstore_Dataset",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Duplicate_Destination1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "Distinct_Destination",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "split1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {Row ID} as string,",
+				"          {Order ID} as string,",
+				"          {Order Date} as string,",
+				"          {Ship Date} as string,",
+				"          {Ship Mode} as string,",
+				"          {Customer ID} as string,",
+				"          {Customer Name} as string,",
+				"          Segment as string,",
+				"          {Country/Region} as string,",
+				"          City as string,",
+				"          {State/Province} as string,",
+				"          {Postal Code} as string,",
+				"          Region as string,",
+				"          {Product ID} as string,",
+				"          Category as string,",
+				"          {Sub-Category} as string,",
+				"          {Product Name} as string,",
+				"          Sales as string,",
+				"          Quantity as string,",
+				"          Discount as string,",
+				"          Profit as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 aggregate(groupBy({Customer Name}),",
+				"     Count = count()) ~> aggregate1",
+				"aggregate1 split(Count > 1,",
+				"     disjoint: false) ~> split1@(conditionDuplicate, conditionsplitDistinct)",
+				"split1@conditionDuplicate sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          {1} as string,",
+				"          {US-2019-103800} as string,",
+				"          {03-01-2019} as string,",
+				"          {07-01-2019} as string,",
+				"          {Standard Class} as string,",
+				"          {DP-13000} as string,",
+				"          {Darren Powers} as string,",
+				"          Consumer as string,",
+				"          {United States} as string,",
+				"          Houston as string,",
+				"          Texas as string,",
+				"          {77095} as string,",
+				"          Central as string,",
+				"          {OFF-PA-10000174} as string,",
+				"          {Office Supplies} as string,",
+				"          Paper as string,",
+				"          {\"Message Book, Wirebound, Four 5 1/2\"\" X 4\"\" Forms/Pg.} as string,",
+				"          {200 Dupl. Sets/Book\"} as string,",
+				"          {16.448} as string,",
+				"          {2} as string,",
+				"          {0.2} as string,",
+				"          US as string",
+				"     ),",
+				"     partitionFileNames:['Duplicates'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1",
+				"split1@conditionsplitDistinct sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          {1} as string,",
+				"          {US-2019-103800} as string,",
+				"          {03-01-2019} as string,",
+				"          {07-01-2019} as string,",
+				"          {Standard Class} as string,",
+				"          {DP-13000} as string,",
+				"          {Darren Powers} as string,",
+				"          Consumer as string,",
+				"          {United States} as string,",
+				"          Houston as string,",
+				"          Texas as string,",
+				"          {77095} as string,",
+				"          Central as string,",
+				"          {OFF-PA-10000174} as string,",
+				"          {Office Supplies} as string,",
+				"          Paper as string,",
+				"          {\"Message Book, Wirebound, Four 5 1/2\"\" X 4\"\" Forms/Pg.} as string,",
+				"          {200 Dupl. Sets/Book\"} as string,",
+				"          {16.448} as string,",
+				"          {2} as string,",
+				"          {0.2} as string,",
+				"          US as string",
+				"     ),",
+				"     partitionFileNames:['Distinct'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink2"
+			]
+		}
+	}
+}

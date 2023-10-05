@@ -1,0 +1,112 @@
+{
+	"name": "Distinct_Destination",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "filesystemtest"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "1",
+				"type": "String"
+			},
+			{
+				"name": "US-2019-103800",
+				"type": "String"
+			},
+			{
+				"name": "03-01-2019",
+				"type": "String"
+			},
+			{
+				"name": "07-01-2019",
+				"type": "String"
+			},
+			{
+				"name": "Standard Class",
+				"type": "String"
+			},
+			{
+				"name": "DP-13000",
+				"type": "String"
+			},
+			{
+				"name": "Darren Powers",
+				"type": "String"
+			},
+			{
+				"name": "Consumer",
+				"type": "String"
+			},
+			{
+				"name": "United States",
+				"type": "String"
+			},
+			{
+				"name": "Houston",
+				"type": "String"
+			},
+			{
+				"name": "Texas",
+				"type": "String"
+			},
+			{
+				"name": "77095",
+				"type": "String"
+			},
+			{
+				"name": "Central",
+				"type": "String"
+			},
+			{
+				"name": "OFF-PA-10000174",
+				"type": "String"
+			},
+			{
+				"name": "Office Supplies",
+				"type": "String"
+			},
+			{
+				"name": "Paper",
+				"type": "String"
+			},
+			{
+				"name": "\"Message Book, Wirebound, Four 5 1/2\"\" X 4\"\" Forms/Pg.",
+				"type": "String"
+			},
+			{
+				"name": "200 Dupl. Sets/Book\"",
+				"type": "String"
+			},
+			{
+				"name": "16.448",
+				"type": "String"
+			},
+			{
+				"name": "2",
+				"type": "String"
+			},
+			{
+				"name": "0.2",
+				"type": "String"
+			},
+			{
+				"name": "US",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
