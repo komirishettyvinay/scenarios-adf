@@ -1,0 +1,33 @@
+{
+	"name": "Source_Excel1_Dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"SheetIndex": {
+				"type": "int"
+			}
+		},
+		"folder": {
+			"name": "Excel"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "emp_combine.xlsx",
+				"folderPath": "Data",
+				"fileSystem": "filesystemtest"
+			},
+			"sheetIndex": {
+				"value": "@dataset().SheetIndex",
+				"type": "Expression"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	}
+}
