@@ -1,0 +1,29 @@
+{
+	"name": "Rest_Call_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Rest_call to waitPL in qadf Web",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://management.azure.com/subscriptions/4e7d92f3-f18f-4054-b8f0-63a6f30f0c5d/resourceGroups/test/providers/Microsoft.DataFactory/factories/qa-df-env/pipelines/wait_pipeline/createRun?api-version=2018-06-01",
+					"method": "POST",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
