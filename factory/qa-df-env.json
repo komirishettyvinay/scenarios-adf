@@ -1,0 +1,9 @@
+{
+	"name": "qa-df-env",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "dc8b1ac1-7ba8-4168-b8a1-af2892907850",
+		"tenantId": "71b3cf85-266f-452c-bbec-11f0d31531a8"
+	}
+}
